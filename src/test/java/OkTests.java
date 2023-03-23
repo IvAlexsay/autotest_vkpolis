@@ -6,8 +6,9 @@ import com.codeborne.selenide.Condition;
 
 import Pages.OkAuthorizationPage;
 import Pages.OkMainPage;
+import Templates.OkLogin;
 
-public class OkTests extends OkLogin{
+public class OkTests extends OkLogin {
     @Test
     @Tag("Authorization")
     @DisplayName("User failed authorization test")

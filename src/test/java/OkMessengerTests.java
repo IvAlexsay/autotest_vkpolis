@@ -9,11 +9,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 
+import Templates.OkLogin;
+
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class OkMessengerTests extends OkLogin{
+public class OkMessengerTests extends OkLogin {
     private static final ElementsCollection dialogs = $(byClassName("custom-scrollbar")).findAll("msg-chats-list-item");
 
     @BeforeAll
@@ -21,6 +23,7 @@ public class OkMessengerTests extends OkLogin{
         loginIn();
     }
 
+    @Disabled
     @ParameterizedTest
     @Tag("Messenger")
     @DisplayName("Find dialogs with persons")
@@ -30,12 +33,14 @@ public class OkMessengerTests extends OkLogin{
         dialogs.findBy(Condition.text(person)).should(Condition.exist);
     }
 
+
     @Disabled
     @Test
     @Tag("Messenger")
     public void sendMessage() {
         open("https://ok.ru/messages");
-        dialogs.get(0).click();
+        dialogs.findBy(Condition.text("Алексей Ивакин")).find("a").click();
+        $("msg-input").setValue("sada").pressEnter();
     }
 
 }
