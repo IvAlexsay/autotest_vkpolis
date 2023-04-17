@@ -1,3 +1,5 @@
+package Tests;
+
 import org.openqa.selenium.support.ui.LoadableComponent;
 
 import com.codeborne.selenide.Condition;

@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.ElementsCollection;
 
+import Pages.OkAuthorizationPage;
 import Pages.OkMainPage;
-import Templates.OkLogin;
+import Tests.BaseTest;
 
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selenide.$;
@@ -17,25 +18,26 @@ import static org.hamcrest.Matchers.equalToCompressingWhiteSpace;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.not;
 
-public class MatchersTest extends OkLogin {
+public class MatchersTest extends BaseTest {
 
     @BeforeAll
     public static void init() {
-        OkLogin.loginIn();
+        OkAuthorizationPage page = new OkAuthorizationPage();
+        page.loginIn(email, password);
     }
 
     @Test
     public void checkName() {
         String name = "botS23AT11     botS23AT11";
         OkMainPage mainPage = new OkMainPage();
-        String curName = mainPage.getName().getText();
+        String curName = mainPage.getName();
         assertThat(curName, equalToCompressingWhiteSpace(name));
     }
 
     @Test
     public void checkNameStartWith() {
         OkMainPage mainPage = new OkMainPage();
-        String curName = mainPage.getName().getText();
+        String curName = mainPage.getName();
         assertThat(curName, CustomMatcher.startWith("bot"));
     }
 

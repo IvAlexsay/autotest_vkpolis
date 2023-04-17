@@ -1,7 +1,9 @@
-package Templates;
+package Tests;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,12 +14,12 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
-public class OkLogin {
+public class BaseTest {
     protected static final String email = "botS23AT11";
     protected static final String password = "autotests2023";
 
-    @BeforeAll
-    public static void openOk(){
+    @BeforeEach
+    public void openOk(){
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver_win32/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.setBinary("C:\\Users\\roman\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
@@ -25,13 +27,13 @@ public class OkLogin {
         setWebDriver(driver);
         open("https://ok.ru/");
     }
-    public static void loginIn(){
-        OkAuthorizationPage authorizationPage = new OkAuthorizationPage();
-        authorizationPage.loginIn(email, password);
+
+    public void openMessages(){
+        open("https://ok.ru/messages");
     }
 
-    @AfterAll
-    public static void closeDriver(){
+    @AfterEach
+    public void closeDriver(){
         closeWebDriver();
     }
 }
